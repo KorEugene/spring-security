@@ -6,23 +6,41 @@ create table users (
   primary key (id)
 );
 
-create table roles (
+--create table roles (
+--  id                    serial,
+--  role_name                  varchar(50) not null,
+--  primary key (id)
+--);
+
+create table authorities (
   id                    serial,
-  role_name                  varchar(50) not null,
+  authority_name                  varchar(50) not null,
   primary key (id)
 );
 
-create table users_roles (
+--create table users_roles (
+--  user_id               bigint not null,
+--  role_id               int not null,
+--  primary key (user_id, role_id),
+--  foreign key (user_id) references users (id),
+--  foreign key (role_id) references roles (id)
+--);
+
+create table users_authorities (
   user_id               bigint not null,
-  role_id               int not null,
-  primary key (user_id, role_id),
+  authority_id               int not null,
+  primary key (user_id, authority_id),
   foreign key (user_id) references users (id),
-  foreign key (role_id) references roles (id)
+  foreign key (authority_id) references authorities (id)
 );
 
-insert into roles (role_name)
+--insert into roles (role_name)
+--values
+--('ROLE_USER'), ('ROLE_ADMIN');
+
+insert into authorities (authority_name)
 values
-('ROLE_USER'), ('ROLE_ADMIN');
+('USER'), ('ADMIN');
 
 insert into users (username, password, email)
 values
@@ -31,7 +49,12 @@ values
 --admin/admin
 ('admin', '$2a$12$9xSgxzeNkBTrKXjmyx1tTuArvRybplc1ukKgQBzTojCr01r2uIZg2', 'admin@gmail.com');
 
-insert into users_roles (user_id, role_id)
+--insert into users_roles (user_id, role_id)
+--values
+--(1, 1),
+--(2, 2);
+
+insert into users_authorities (user_id, authority_id)
 values
 (1, 1),
 (2, 2);
